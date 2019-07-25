@@ -1,0 +1,47 @@
+from sys import *
+import os
+
+def DiretoryWatcher(path):
+
+    flag = os.path.isabs(path)
+    if flag == False:
+        path = os.path.abspath(path)
+
+    exsist = os.path.isdir(path)
+
+    if exsist:
+        for foldername,subfolder,filname in os.walk(path):
+            print("Current of folder is:"+foldername)
+            for subf in subfolder:
+                print("sub folder of"+foldername+"is:"+subf)
+            for filen in filname:
+                print("file inside"+foldername+"is :"+filen)
+            print("")
+    else:
+        print("Invalid path")
+
+def main():
+    print("Wlecome to automation Script")
+
+    print("Application name :"+argv[0])
+
+    if(len(argv)!=2):
+        print("Error: Invalid number of argument")
+        exit()
+    if (argv[1]=="-h") or (argv[1]=="-H"):
+        print("This Script is used to traverse specific Directory")
+        exit()
+
+    if (argv[1]=="-u") or (argv[1]=="-U"):
+        print("usage : ApplicationName AbsolutePath_of_Directory")
+        exit()
+    try:
+        DiretoryWatcher(argv[1])
+    except ValueError:
+        print("Error : Invalid Datatype if input")
+
+    except Exception:
+        print("Error : Invalid input")
+
+if __name__=="__main__":
+    main()
